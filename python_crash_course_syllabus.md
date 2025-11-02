@@ -1,403 +1,1659 @@
-# Python Crash Course for PHP Developers
-## Transitioning to Python & Django
-
-**Duration:** 5 Days (Intensive)  
-**Target Audience:** PHP Developers  
-**Goal:** Quickly ramp up on Python fundamentals and prepare for Django development
+# PHP vs Python: Side-by-Side Code Comparison
+## Complete Reference Guide for PHP Developers Learning Python
 
 ---
 
-## Course Overview
+## Table of Contents
 
-This crash course is designed specifically for developers with PHP experience who need to quickly transition to Python and Django. We'll leverage your existing programming knowledge while highlighting key differences and Python-specific patterns.
+1. [Basic Syntax](#basic-syntax)
+2. [Variables & Data Types](#variables--data-types)
+3. [Strings](#strings)
+4. [Arrays & Collections](#arrays--collections)
+5. [Control Structures](#control-structures)
+6. [Functions](#functions)
+7. [Classes & Objects](#classes--objects)
+8. [File Operations](#file-operations)
+9. [Database Operations](#database-operations)
+10. [Web Framework Comparison](#web-framework-comparison)
+11. [API Development](#api-development)
+12. [Common Patterns](#common-patterns)
 
 ---
 
-## Day 1: Python Fundamentals & Syntax Comparison
+## Basic Syntax
 
-### Session 1: Environment Setup & Python Basics (2 hours)
+### Hello World
 
-**Topics:**
-- Installing Python (3.11+) and pip
-- Virtual environments (venv) - Python's equivalent to Composer
-- Python REPL and interactive development
-- Running Python scripts
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
 
-**PHP vs Python Comparisons:**
-- `<?php ?>` tags → No tags needed in Python
-- `$variable` → `variable` (no $ prefix)
-- `echo` / `print` → `print()`
-- `;` semicolons → Not required (newline-based)
-- `{}` blocks → Indentation-based blocks
+```php
+<?php
+echo "Hello, World!";
+print "Hello, World!";
+?>
+```
 
-**Hands-on:**
+</td>
+<td>
+
 ```python
-# Hello World
-print("Hello, Python!")
+print("Hello, World!")
+# That's it! No tags needed
+```
 
-# Variables (no $ prefix!)
+</td>
+</tr>
+</table>
+
+### Comments
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Single line comment
+
+# Also single line
+
+/*
+Multi-line comment
+spanning multiple lines
+*/
+
+/**
+ * DocBlock comment
+ * @param string $name
+ */
+?>
+```
+
+</td>
+<td>
+
+```python
+# Single line comment
+
+"""
+Multi-line comment
+spanning multiple lines
+(actually a docstring)
+"""
+
+'''
+Can also use single quotes
+for multi-line strings/comments
+'''
+
+def greet(name):
+    """
+    DocString for documentation
+    Args:
+        name (str): The name to greet
+    """
+    pass
+```
+
+</td>
+</tr>
+</table>
+
+### Code Blocks
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Braces define blocks
+if ($condition) {
+    echo "True";
+    echo "Still in block";
+}
+
+// One-liner without braces
+if ($condition)
+    echo "True";
+?>
+```
+
+</td>
+<td>
+
+```python
+# Indentation defines blocks
+if condition:
+    print("True")
+    print("Still in block")
+
+# Indentation is mandatory!
+if condition:
+    print("True")  # 4 spaces indent
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## Variables & Data Types
+
+### Variable Declaration
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Variables start with $
+$name = "John";
+$age = 30;
+$price = 19.99;
+$is_active = true;
+$nothing = null;
+
+// No type declaration needed
+$dynamic = "string";
+$dynamic = 42;  // Now it's an int
+?>
+```
+
+</td>
+<td>
+
+```python
+# No $ prefix needed
+name = "John"
+age = 30
+price = 19.99
+is_active = True  # Capital T
+nothing = None    # Capital N
+
+# Dynamic typing
+dynamic = "string"
+dynamic = 42  # Now it's an int
+
+# Type hints (optional)
+name: str = "John"
+age: int = 30
+```
+
+</td>
+</tr>
+</table>
+
+### Type Checking
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+$value = 42;
+
+// Type checking
+var_dump(gettype($value));  // "integer"
+var_dump(is_int($value));   // true
+var_dump(is_string($value)); // false
+var_dump(is_array($value));  // false
+var_dump(is_null($value));   // false
+
+// Type conversion
+$str = (string)$value;
+$int = (int)"123";
+$float = (float)"19.99";
+$bool = (bool)$value;
+?>
+```
+
+</td>
+<td>
+
+```python
+value = 42
+
+# Type checking
+print(type(value))        # <class 'int'>
+print(isinstance(value, int))     # True
+print(isinstance(value, str))     # False
+print(isinstance(value, list))    # False
+print(value is None)              # False
+
+# Type conversion
+str_val = str(value)
+int_val = int("123")
+float_val = float("19.99")
+bool_val = bool(value)
+```
+
+</td>
+</tr>
+</table>
+
+### Constants
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Old style
+define('API_KEY', 'abc123');
+define('MAX_USERS', 100);
+
+// Modern style (PHP 7.1+)
+const API_KEY = 'abc123';
+const MAX_USERS = 100;
+
+echo API_KEY;
+echo MAX_USERS;
+?>
+```
+
+</td>
+<td>
+
+```python
+# Convention: ALL_CAPS for constants
+# (not enforced, just convention)
+API_KEY = 'abc123'
+MAX_USERS = 100
+
+print(API_KEY)
+print(MAX_USERS)
+
+# In Python 3.8+, you can use Final
+from typing import Final
+
+API_KEY: Final = 'abc123'
+MAX_USERS: Final[int] = 100
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## Strings
+
+### String Operations
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+$name = "John";
+$age = 30;
+
+// Concatenation
+$greeting = "Hello " . $name;
+$info = $name . " is " . $age;
+
+// Interpolation (double quotes)
+$greeting = "Hello $name";
+$info = "$name is $age years old";
+$info = "{$name} is {$age}";
+
+// Single quotes (no interpolation)
+$literal = 'Hello $name';  // Literal
+
+// Multi-line
+$multiline = "Line 1
+Line 2
+Line 3";
+
+$heredoc = <<<EOT
+Line 1
+Line 2
+Line 3
+EOT;
+?>
+```
+
+</td>
+<td>
+
+```python
 name = "John"
 age = 30
 
-# Comments
-# Single line comment
-"""
-Multi-line comment
-or docstring
-"""
+# Concatenation
+greeting = "Hello " + name
+info = name + " is " + str(age)
+
+# f-strings (Python 3.6+) - BEST
+greeting = f"Hello {name}"
+info = f"{name} is {age} years old"
+
+# .format() method
+greeting = "Hello {}".format(name)
+info = "{} is {}".format(name, age)
+
+# % formatting (old style)
+greeting = "Hello %s" % name
+info = "%s is %d" % (name, age)
+
+# Multi-line
+multiline = """Line 1
+Line 2
+Line 3"""
+
+# Or
+multiline = ("Line 1\n"
+             "Line 2\n"
+             "Line 3")
 ```
 
-### Session 2: Data Types & Variables (2 hours)
+</td>
+</tr>
+</table>
 
-**Topics:**
-- Basic data types: int, float, str, bool
-- Type hints (optional but recommended)
-- String operations and f-strings
-- None vs PHP's null
-- Dynamic typing
+### String Methods
 
-**PHP → Python Equivalents:**
-```python
-# PHP: $name = "John";
-name = "John"
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
 
-# PHP: $count = 42;
-count = 42
+```php
+<?php
+$text = "Hello World";
 
-# PHP: $price = 19.99;
-price = 19.99
+// Length
+strlen($text);              // 11
 
-# PHP: $is_active = true;
-is_active = True  # Note: Capital T
+// Case conversion
+strtoupper($text);          // "HELLO WORLD"
+strtolower($text);          // "hello world"
+ucfirst($text);             // "Hello world"
+ucwords($text);             // "Hello World"
 
-# PHP: $value = null;
-value = None  # Note: Capital N
+// Trim
+trim(" hello ");            // "hello"
+ltrim(" hello");            // "hello"
+rtrim("hello ");            // "hello"
 
-# String interpolation
-# PHP: "Hello $name"
-# Python:
-greeting = f"Hello {name}"  # f-strings (Python 3.6+)
+// Replace
+str_replace("World", "PHP", $text);
 
-# Type hints (optional)
-def greet(name: str) -> str:
-    return f"Hello {name}"
+// Split
+explode(" ", $text);        // ["Hello", "World"]
+
+// Join
+implode(", ", ["a", "b"]);  // "a, b"
+
+// Substring
+substr($text, 0, 5);        // "Hello"
+
+// Position
+strpos($text, "World");     // 6
+str_contains($text, "World"); // true (PHP 8+)
+
+// Repeat
+str_repeat("Ha", 3);        // "HaHaHa"
+?>
 ```
 
-**Hands-on:**
-- Variable declarations and type checking
-- String formatting exercises
-- Type conversion practices
+</td>
+<td>
 
-### Session 3: Collections & Data Structures (2 hours)
-
-**Topics:**
-- Lists (like PHP arrays)
-	•	Mutable (you can change items)
-	•	Ordered
-	•	Can store mixed data types
-- Tuples (immutable lists)
-	•	Immutable: cannot modify after creation
-	•	Ordered
-	•	Used for fixed data
-- Dictionaries (like PHP associative arrays)
-	•	Key-value pairs
-	•	Keys must be unique
-	•	Similar to PHP associative arrays
-- Sets
-	•	Unordered collection
-	•	No duplicate values
-	•	Useful for uniqueness checks
-- List comprehensions
-	•	A concise way to create lists
-	•	Replaces loops for generating new lists
-
-**PHP → Python Equivalents:**
 ```python
-# PHP: $fruits = array("apple", "banana");
-# Python List:
-fruits = ["apple", "banana"]
-fruits.append("orange")
-print(fruits[0])  # apple
+text = "Hello World"
 
-# PHP: $person = array("name" => "John", "age" => 30);
-# Python Dictionary:
-person = {"name": "John", "age": 30}
-print(person["name"])  # John
-person["email"] = "john@example.com"
+# Length
+len(text)                   # 11
 
-# PHP: foreach ($fruits as $fruit)
-# Python:
+# Case conversion
+text.upper()                # "HELLO WORLD"
+text.lower()                # "hello world"
+text.capitalize()           # "Hello world"
+text.title()                # "Hello World"
+
+# Trim
+" hello ".strip()           # "hello"
+" hello".lstrip()           # "hello"
+"hello ".rstrip()           # "hello"
+
+# Replace
+text.replace("World", "Python")
+
+# Split
+text.split(" ")             # ["Hello", "World"]
+
+# Join
+", ".join(["a", "b"])       # "a, b"
+
+# Substring (slicing)
+text[0:5]                   # "Hello"
+text[:5]                    # "Hello"
+text[6:]                    # "World"
+
+# Position
+text.find("World")          # 6
+"World" in text             # True
+
+# Repeat
+"Ha" * 3                    # "HaHaHa"
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## Arrays & Collections
+
+### Indexed Arrays / Lists
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Creating arrays
+$fruits = array("apple", "banana", "orange");
+$fruits = ["apple", "banana", "orange"];  // Short syntax
+
+// Accessing elements
+echo $fruits[0];            // "apple"
+echo $fruits[1];            // "banana"
+
+// Adding elements
+$fruits[] = "grape";        // Append
+array_push($fruits, "mango");
+array_unshift($fruits, "kiwi"); // Prepend
+
+// Removing elements
+array_pop($fruits);         // Remove last
+array_shift($fruits);       // Remove first
+unset($fruits[1]);          // Remove by index
+
+// Array length
+count($fruits);
+
+// Check if exists
+in_array("apple", $fruits);
+isset($fruits[0]);
+
+// Slicing
+array_slice($fruits, 0, 2);
+
+// Merging
+$combined = array_merge($arr1, $arr2);
+
+// Sorting
+sort($fruits);              // Ascending
+rsort($fruits);             // Descending
+
+// Iteration
+foreach ($fruits as $fruit) {
+    echo $fruit;
+}
+
+foreach ($fruits as $index => $fruit) {
+    echo "$index: $fruit";
+}
+?>
+```
+
+</td>
+<td>
+
+```python
+# Creating lists
+fruits = ["apple", "banana", "orange"]
+
+# Accessing elements
+print(fruits[0])            # "apple"
+print(fruits[1])            # "banana"
+print(fruits[-1])           # "orange" (last)
+
+# Adding elements
+fruits.append("grape")      # Append
+fruits.insert(0, "kiwi")    # Insert at position
+fruits.extend(["mango", "peach"])  # Add multiple
+
+# Removing elements
+fruits.pop()                # Remove last
+fruits.pop(0)               # Remove by index
+fruits.remove("apple")      # Remove by value
+del fruits[1]               # Remove by index
+
+# List length
+len(fruits)
+
+# Check if exists
+"apple" in fruits
+0 < len(fruits)             # Check index exists
+
+# Slicing
+fruits[0:2]                 # First 2
+fruits[:2]                  # First 2
+fruits[1:]                  # All but first
+fruits[-2:]                 # Last 2
+
+# Merging
+combined = arr1 + arr2
+
+# Sorting
+fruits.sort()               # In-place ascending
+fruits.sort(reverse=True)   # In-place descending
+sorted(fruits)              # Returns new sorted list
+
+# Iteration
 for fruit in fruits:
     print(fruit)
 
-# PHP: foreach ($person as $key => $value)
-# Python:
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+```
+
+</td>
+</tr>
+</table>
+
+### Associative Arrays / Dictionaries
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Creating associative arrays
+$person = array(
+    "name" => "John",
+    "age" => 30,
+    "email" => "john@example.com"
+);
+
+// Short syntax
+$person = [
+    "name" => "John",
+    "age" => 30,
+    "email" => "john@example.com"
+];
+
+// Accessing values
+echo $person["name"];       // "John"
+echo $person["age"];        // 30
+
+// Adding/updating
+$person["city"] = "New York";
+$person["age"] = 31;
+
+// Removing
+unset($person["email"]);
+
+// Check if key exists
+isset($person["name"]);
+array_key_exists("name", $person);
+
+// Get all keys
+array_keys($person);
+
+// Get all values
+array_values($person);
+
+// Iteration
+foreach ($person as $key => $value) {
+    echo "$key: $value";
+}
+
+// Only keys
+foreach (array_keys($person) as $key) {
+    echo $key;
+}
+
+// Only values
+foreach ($person as $value) {
+    echo $value;
+}
+
+// Count
+count($person);
+
+// Merge
+$merged = array_merge($arr1, $arr2);
+?>
+```
+
+</td>
+<td>
+
+```python
+# Creating dictionaries
+person = {
+    "name": "John",
+    "age": 30,
+    "email": "john@example.com"
+}
+
+# Accessing values
+print(person["name"])       # "John"
+print(person["age"])        # 30
+print(person.get("age"))    # 30
+print(person.get("phone", "N/A"))  # Default
+
+# Adding/updating
+person["city"] = "New York"
+person["age"] = 31
+
+# Removing
+del person["email"]
+person.pop("email")         # Remove and return
+person.pop("phone", None)   # With default
+
+# Check if key exists
+"name" in person
+person.get("name") is not None
+
+# Get all keys
+person.keys()               # dict_keys object
+list(person.keys())         # As list
+
+# Get all values
+person.values()             # dict_values object
+list(person.values())       # As list
+
+# Iteration
 for key, value in person.items():
     print(f"{key}: {value}")
 
-# List comprehension (powerful Python feature!)
-squares = [x**2 for x in range(10)]
-# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+# Only keys
+for key in person:
+    print(key)
 
-# Dictionary comprehension
-person_upper = {k: v.upper() if isinstance(v, str) else v 
-                for k, v in person.items()}
+for key in person.keys():
+    print(key)
+
+# Only values
+for value in person.values():
+    print(value)
+
+# Count
+len(person)
+
+# Merge (Python 3.9+)
+merged = arr1 | arr2
+# Or
+merged = {**arr1, **arr2}
+# Or
+merged = arr1.copy()
+merged.update(arr2)
 ```
 
-**Hands-on:**
-- Converting PHP arrays to Python lists/dicts
-- List manipulation exercises
-- Dictionary operations
+</td>
+</tr>
+</table>
 
-### Session 4: Control Flow (2 hours)
+### List Comprehensions vs Array Functions
 
-**Topics:**
-- if/elif/else statements
-- Comparison operators
-- Logical operators (and, or, not)
-- Truthiness in Python
-- Ternary operators
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
 
-**PHP → Python Equivalents:**
+```php
+<?php
+$numbers = [1, 2, 3, 4, 5];
+
+// Map - transform each element
+$squared = array_map(function($x) {
+    return $x * $x;
+}, $numbers);
+// [1, 4, 9, 16, 25]
+
+// Filter - keep elements matching condition
+$evens = array_filter($numbers, function($x) {
+    return $x % 2 == 0;
+});
+// [2, 4]
+
+// Reduce - combine to single value
+$sum = array_reduce($numbers, function($carry, $x) {
+    return $carry + $x;
+}, 0);
+// 15
+
+// Chaining operations
+$result = array_map(function($x) {
+    return $x * 2;
+}, array_filter($numbers, function($x) {
+    return $x > 2;
+}));
+// [6, 8, 10]
+?>
+```
+
+</td>
+<td>
+
 ```python
-# PHP: if ($age >= 18) { }
-# Python:
+numbers = [1, 2, 3, 4, 5]
+
+# List comprehension - transform
+squared = [x * x for x in numbers]
+# [1, 4, 9, 16, 25]
+
+# List comprehension - filter
+evens = [x for x in numbers if x % 2 == 0]
+# [2, 4]
+
+# Reduce
+from functools import reduce
+sum_val = reduce(lambda carry, x: carry + x, numbers, 0)
+# 15
+
+# Or just use built-in
+sum_val = sum(numbers)
+
+# Map (returns iterator)
+squared = list(map(lambda x: x * x, numbers))
+
+# Filter (returns iterator)
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+
+# Chaining with comprehension
+result = [x * 2 for x in numbers if x > 2]
+# [6, 8, 10]
+
+# Complex comprehension
+result = [
+    x * 2 
+    for x in numbers 
+    if x > 2 
+    if x < 5
+]
+# [6, 8]
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## Control Structures
+
+### If Statements
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+$age = 25;
+
+// Basic if
+if ($age >= 18) {
+    echo "Adult";
+}
+
+// If-else
+if ($age >= 18) {
+    echo "Adult";
+} else {
+    echo "Minor";
+}
+
+// If-elseif-else
+if ($age >= 65) {
+    echo "Senior";
+} elseif ($age >= 18) {
+    echo "Adult";
+} elseif ($age >= 13) {
+    echo "Teen";
+} else {
+    echo "Child";
+}
+
+// Ternary operator
+$status = ($age >= 18) ? "adult" : "minor";
+
+// Null coalescing (PHP 7+)
+$name = $userName ?? "Guest";
+
+// Null coalescing assignment (PHP 7.4+)
+$name ??= "Guest";
+?>
+```
+
+</td>
+<td>
+
+```python
+age = 25
+
+# Basic if
 if age >= 18:
+    print("Adult")
+
+# If-else
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+
+# If-elif-else
+if age >= 65:
+    print("Senior")
+elif age >= 18:
     print("Adult")
 elif age >= 13:
     print("Teen")
 else:
     print("Child")
 
-# PHP: $status = ($age >= 18) ? "adult" : "minor";
-# Python ternary:
+# Ternary operator (conditional expression)
 status = "adult" if age >= 18 else "minor"
 
-# PHP: if ($name && $age)
-# Python:
-if name and age:
-    print("Both exist")
+# Get with default
+name = user_name if user_name else "Guest"
 
-# PHP: if (!$is_active)
-# Python:
-if not is_active:
-    print("Inactive")
-
-# Truthiness
-# False: None, False, 0, "", [], {}, ()
-# True: Everything else
-if user_list:  # Checks if list is not empty
-    print("Has users")
+# Or using walrus operator (Python 3.8+)
+if (name := get_user_name()) is not None:
+    print(f"Hello {name}")
 ```
 
----
+</td>
+</tr>
+</table>
 
-## Day 2: Functions, Loops & Error Handling
+### Switch / Match Statements
 
-### Session 1: Functions (2 hours)
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
 
-**Topics:**
-- Function definition and calling
-- Parameters: positional, keyword, default values
-- *args and **kwargs
-- Return values
-- Lambda functions
-- Decorators (intro)
+```php
+<?php
+$day = "Monday";
 
-**PHP → Python Equivalents:**
-```python
-# PHP: function greet($name) { return "Hello $name"; }
-# Python:
-def greet(name):
-    return f"Hello {name}"
+// Switch statement
+switch ($day) {
+    case "Monday":
+    case "Tuesday":
+    case "Wednesday":
+    case "Thursday":
+    case "Friday":
+        echo "Weekday";
+        break;
+    case "Saturday":
+    case "Sunday":
+        echo "Weekend";
+        break;
+    default:
+        echo "Invalid day";
+}
 
-# Default parameters
-# PHP: function greet($name = "Guest")
-def greet(name="Guest"):
-    return f"Hello {name}"
-
-# Type hints
-def greet(name: str, age: int = 0) -> str:
-    return f"Hello {name}, age {age}"
-
-# Variable arguments
-# PHP: function sum(...$numbers)
-def sum_all(*numbers):
-    return sum(numbers)
-
-# Keyword arguments
-def create_user(name, email, **options):
-    user = {"name": name, "email": email}
-    user.update(options)
-    return user
-
-# Lambda (anonymous function)
-# PHP: $square = fn($x) => $x * $x;
-square = lambda x: x * x
-
-# Higher-order functions
-numbers = [1, 2, 3, 4, 5]
-squared = list(map(lambda x: x**2, numbers))
-evens = list(filter(lambda x: x % 2 == 0, numbers))
+// Switch with return (PHP 8+)
+$result = match ($day) {
+    "Monday", "Tuesday", 
+    "Wednesday", "Thursday", 
+    "Friday" => "Weekday",
+    "Saturday", "Sunday" => "Weekend",
+    default => "Invalid day"
+};
+?>
 ```
 
-### Session 2: Loops & Iterations (2 hours)
+</td>
+<td>
 
-**Topics:**
-- for loops
-- while loops
-- break, continue, pass
-- enumerate() and zip()
-- range() function
-- Iterators and generators (intro)
-
-**PHP → Python Equivalents:**
 ```python
-# PHP: for ($i = 0; $i < 10; $i++)
-# Python:
+day = "Monday"
+
+# Traditional if-elif (before Python 3.10)
+if day in ["Monday", "Tuesday", "Wednesday", 
+           "Thursday", "Friday"]:
+    result = "Weekday"
+elif day in ["Saturday", "Sunday"]:
+    result = "Weekend"
+else:
+    result = "Invalid day"
+
+# Match statement (Python 3.10+)
+match day:
+    case "Monday" | "Tuesday" | "Wednesday" | \
+         "Thursday" | "Friday":
+        result = "Weekday"
+    case "Saturday" | "Sunday":
+        result = "Weekend"
+    case _:
+        result = "Invalid day"
+
+# Dictionary mapping (common pattern)
+day_type = {
+    "Monday": "Weekday",
+    "Tuesday": "Weekday",
+    "Wednesday": "Weekday",
+    "Thursday": "Weekday",
+    "Friday": "Weekday",
+    "Saturday": "Weekend",
+    "Sunday": "Weekend"
+}
+result = day_type.get(day, "Invalid day")
+```
+
+</td>
+</tr>
+</table>
+
+### Loops
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// For loop
+for ($i = 0; $i < 10; $i++) {
+    echo $i;
+}
+
+// While loop
+$count = 0;
+while ($count < 10) {
+    echo $count;
+    $count++;
+}
+
+// Do-while loop
+$count = 0;
+do {
+    echo $count;
+    $count++;
+} while ($count < 10);
+
+// Foreach loop
+$fruits = ["apple", "banana", "orange"];
+foreach ($fruits as $fruit) {
+    echo $fruit;
+}
+
+// Foreach with index
+foreach ($fruits as $index => $fruit) {
+    echo "$index: $fruit";
+}
+
+// Break and continue
+for ($i = 0; $i < 10; $i++) {
+    if ($i == 5) {
+        break;  // Exit loop
+    }
+    if ($i == 3) {
+        continue;  // Skip iteration
+    }
+    echo $i;
+}
+?>
+```
+
+</td>
+<td>
+
+```python
+# For loop with range
 for i in range(10):
     print(i)
 
-# PHP: foreach ($items as $item)
-for item in items:
-    print(item)
+# For loop with step
+for i in range(0, 10, 2):  # 0, 2, 4, 6, 8
+    print(i)
 
-# PHP: foreach ($items as $index => $item)
-for index, item in enumerate(items):
-    print(f"{index}: {item}")
-
-# PHP: while ($count < 10)
+# While loop
 count = 0
 while count < 10:
     print(count)
     count += 1
 
-# Zip two lists
-names = ["John", "Jane", "Bob"]
-ages = [30, 25, 35]
-for name, age in zip(names, ages):
-    print(f"{name} is {age} years old")
+# No do-while in Python
+# Use while True with break
+count = 0
+while True:
+    print(count)
+    count += 1
+    if count >= 10:
+        break
 
-# Loop with else (unique to Python!)
-for i in range(5):
-    if i == 10:
+# For loop over list
+fruits = ["apple", "banana", "orange"]
+for fruit in fruits:
+    print(fruit)
+
+# For loop with index
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+
+# Break and continue
+for i in range(10):
+    if i == 5:
+        break  # Exit loop
+    if i == 3:
+        continue  # Skip iteration
+    print(i)
+
+# For-else (unique to Python!)
+for i in range(10):
+    if i == 15:
         break
 else:
     print("Loop completed without break")
 ```
 
-### Session 3: Exception Handling (2 hours)
-
-**Topics:**
-- try/except blocks
-- Multiple exception types
-- finally clause
-- Raising exceptions
-- Custom exceptions
-- Context managers (with statement)
-
-**PHP → Python Equivalents:**
-```python
-# PHP: try { } catch (Exception $e) { } finally { }
-# Python:
-try:
-    result = 10 / 0
-except ZeroDivisionError as e:
-    print(f"Error: {e}")
-except ValueError as e:
-    print(f"Value error: {e}")
-except Exception as e:
-    print(f"General error: {e}")
-finally:
-    print("Cleanup")
-
-# Raising exceptions
-# PHP: throw new Exception("Error");
-# Python:
-raise ValueError("Invalid value")
-
-# Custom exceptions
-class InvalidUserError(Exception):
-    pass
-
-# Context managers (auto cleanup)
-# PHP: $file = fopen(); ... fclose($file);
-# Python:
-with open('file.txt', 'r') as file:
-    content = file.read()
-# File automatically closed
-
-# Database example
-with get_db_connection() as conn:
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users")
-# Connection automatically closed
-```
-
-### Session 4: File Operations (1.5 hours)
-
-**Topics:**
-- Reading and writing files
-- File modes
-- Working with paths
-- JSON operations
-- CSV operations
-
-```python
-# Reading files
-with open('data.txt', 'r') as f:
-    content = f.read()
-    
-# Writing files
-with open('output.txt', 'w') as f:
-    f.write("Hello World\n")
-
-# Reading lines
-with open('data.txt', 'r') as f:
-    for line in f:
-        print(line.strip())
-
-# JSON
-import json
-
-# PHP: json_encode()
-data = {"name": "John", "age": 30}
-json_string = json.dumps(data)
-
-# PHP: json_decode()
-parsed = json.loads(json_string)
-
-# File operations
-import json
-with open('data.json', 'w') as f:
-    json.dump(data, f, indent=2)
-
-# CSV
-import csv
-with open('users.csv', 'r') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        print(row['name'], row['email'])
-```
+</td>
+</tr>
+</table>
 
 ---
 
-## Day 3: Object-Oriented Programming
+## Functions
 
-### Session 1: Classes & Objects (2 hours)
+### Basic Functions
 
-**Topics:**
-- Class definition
-- __init__ constructor
-- Instance vs class variables
-- Methods
-- self parameter
-- Property decorators
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
 
-**PHP → Python Equivalents:**
+```php
+<?php
+// Basic function
+function greet($name) {
+    return "Hello, " . $name;
+}
+
+echo greet("John");
+
+// Default parameters
+function greet($name = "Guest") {
+    return "Hello, " . $name;
+}
+
+// Type declarations (PHP 7+)
+function add(int $a, int $b): int {
+    return $a + $b;
+}
+
+// Multiple return values (using array)
+function getCoordinates() {
+    return [10, 20];
+}
+list($x, $y) = getCoordinates();
+
+// Or using array destructuring (PHP 7.1+)
+[$x, $y] = getCoordinates();
+
+// Variable number of arguments
+function sum(...$numbers) {
+    return array_sum($numbers);
+}
+echo sum(1, 2, 3, 4);  // 10
+
+// Named arguments (PHP 8+)
+function createUser($name, $email, $age = 0) {
+    // ...
+}
+createUser(
+    name: "John",
+    age: 30,
+    email: "john@example.com"
+);
+?>
+```
+
+</td>
+<td>
+
 ```python
-# PHP: class User { public $name; }
-# Python:
+# Basic function
+def greet(name):
+    return f"Hello, {name}"
+
+print(greet("John"))
+
+# Default parameters
+def greet(name="Guest"):
+    return f"Hello, {name}"
+
+# Type hints (Python 3.5+)
+def add(a: int, b: int) -> int:
+    return a + b
+
+# Multiple return values (tuple)
+def get_coordinates():
+    return 10, 20
+
+x, y = get_coordinates()
+
+# Or explicitly as tuple
+def get_coordinates():
+    return (10, 20)
+
+# Variable number of arguments
+def sum_all(*numbers):
+    return sum(numbers)
+
+print(sum_all(1, 2, 3, 4))  # 10
+
+# Keyword arguments
+def create_user(name, email, age=0):
+    pass
+
+# Positional
+create_user("John", "john@example.com", 30)
+
+# Keyword
+create_user(
+    name="John",
+    age=30,
+    email="john@example.com"
+)
+```
+
+</td>
+</tr>
+</table>
+
+### Advanced Function Features
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Anonymous function (closure)
+$greet = function($name) {
+    return "Hello, " . $name;
+};
+echo $greet("John");
+
+// Arrow function (PHP 7.4+)
+$square = fn($x) => $x * $x;
+echo $square(5);  // 25
+
+// Closure with use
+$multiplier = 2;
+$multiply = function($x) use ($multiplier) {
+    return $x * $multiplier;
+};
+echo $multiply(5);  // 10
+
+// Higher-order functions
+function applyOperation($numbers, $operation) {
+    return array_map($operation, $numbers);
+}
+
+$squared = applyOperation([1, 2, 3], fn($x) => $x * $x);
+
+// Callable type
+function executeCallback(callable $callback) {
+    return $callback();
+}
+?>
+```
+
+</td>
+<td>
+
+```python
+# Lambda (anonymous function)
+greet = lambda name: f"Hello, {name}"
+print(greet("John"))
+
+# Lambda with single expression
+square = lambda x: x * x
+print(square(5))  # 25
+
+# Closure
+multiplier = 2
+def multiply(x):
+    return x * multiplier
+
+print(multiply(5))  # 10
+
+# Or with lambda
+multiply = lambda x: x * multiplier
+
+# Higher-order functions
+def apply_operation(numbers, operation):
+    return list(map(operation, numbers))
+
+squared = apply_operation([1, 2, 3], lambda x: x * x)
+
+# Function as parameter
+def execute_callback(callback):
+    return callback()
+
+# Decorators (function modifying functions)
+def log_calls(func):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {func.__name__}")
+        return func(*args, **kwargs)
+    return wrapper
+
+@log_calls
+def greet(name):
+    return f"Hello, {name}"
+```
+
+</td>
+</tr>
+</table>
+
+### *args and **kwargs
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Variable arguments
+function sum(...$numbers) {
+    return array_sum($numbers);
+}
+echo sum(1, 2, 3);  // 6
+
+// Unpacking array as arguments
+$numbers = [1, 2, 3];
+sum(...$numbers);  // 6
+
+// Named parameters (PHP 8+)
+function createUser(
+    string $name,
+    string $email,
+    int $age = 0,
+    ...$options
+) {
+    print_r($options);
+}
+
+createUser(
+    "John",
+    "john@example.com",
+    role: "admin",
+    active: true
+);
+?>
+```
+
+</td>
+<td>
+
+```python
+# *args - variable positional arguments
+def sum_all(*args):
+    return sum(args)
+
+print(sum_all(1, 2, 3))  # 6
+
+# **kwargs - variable keyword arguments
+def create_user(name, email, **kwargs):
+    print(f"Name: {name}")
+    print(f"Email: {email}")
+    print(f"Options: {kwargs}")
+
+create_user(
+    "John",
+    "john@example.com",
+    role="admin",
+    active=True
+)
+
+# Combining both
+def flexible_function(*args, **kwargs):
+    print(f"Args: {args}")
+    print(f"Kwargs: {kwargs}")
+
+flexible_function(1, 2, 3, name="John", age=30)
+
+# Unpacking
+numbers = [1, 2, 3]
+sum_all(*numbers)  # Unpack list
+
+options = {"role": "admin", "active": True}
+create_user("John", "john@example.com", **options)
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## Classes & Objects
+
+### Basic Class Definition
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+class User {
+    // Properties
+    public $name;
+    public $email;
+    private $password;
+    protected $role;
+    
+    // Static property
+    public static $count = 0;
+    
+    // Constructor
+    public function __construct($name, $email) {
+        $this->name = $name;
+        $this->email = $email;
+        self::$count++;
+    }
+    
+    // Method
+    public function greet() {
+        return "Hello, I'm " . $this->name;
+    }
+    
+    // Static method
+    public static function getCount() {
+        return self::$count;
+    }
+    
+    // Magic method
+    public function __toString() {
+        return $this->name;
+    }
+}
+
+// Creating instance
+$user = new User("John", "john@example.com");
+echo $user->greet();
+echo $user->name;
+
+// Static access
+echo User::$count;
+echo User::getCount();
+?>
+```
+
+</td>
+<td>
+
+```python
+class User:
+    # Class variable (like static)
+    count = 0
+    
+    # Constructor
+    def __init__(self, name, email):
+        # Instance variables (like properties)
+        self.name = name
+        self.email = email
+        self._password = None  # Convention: _ = protected
+        self.__secret = None   # __ = private (name mangling)
+        User.count += 1
+    
+    # Instance method
+    def greet(self):
+        return f"Hello, I'm {self.name}"
+    
+    # Class method (like static)
+    @classmethod
+    def get_count(cls):
+        return cls.count
+    
+    # Static method
+    @staticmethod
+    def validate_email(email):
+        return "@" in email
+    
+    # Magic method
+    def __str__(self):
+        return self.name
+
+# Creating instance (no 'new' keyword)
+user = User("John", "john@example.com")
+print(user.greet())
+print(user.name)
+
+# Class variable access
+print(User.count)
+print(User.get_count())
+print(User.validate_email("test@example.com"))
+```
+
+</td>
+</tr>
+</table>
+
+### Properties and Getters/Setters
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+class User {
+    private $firstName;
+    private $lastName;
+    
+    public function __construct($firstName, $lastName) {
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+    }
+    
+    // Getter
+    public function getFullName() {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+    
+    // Setter
+    public function setFullName($fullName) {
+        [$this->firstName, $this->lastName] = 
+            explode(' ', $fullName, 2);
+    }
+    
+    // Magic getters/setters
+    public function __get($property) {
+        return $this->$property ?? null;
+    }
+    
+    public function __set($property, $value) {
+        $this->$property = $value;
+    }
+}
+
+$user = new User("John", "Doe");
+echo $user->getFullName();  // "John Doe"
+$user->setFullName("Jane Smith");
+?>
+```
+
+</td>
+<td>
+
+```python
+class User:
+    def __init__(self, first_name, last_name):
+        self._first_name = first_name
+        self._last_name = last_name
+    
+    # Property decorator (like getter)
+    @property
+    def full_name(self):
+        return f"{self._first_name} {self._last_name}"
+    
+    # Setter
+    @full_name.setter
+    def full_name(self, value):
+        self._first_name, self._last_name = \
+            value.split(' ', 1)
+    
+    # Deleter (optional)
+    @full_name.deleter
+    def full_name(self):
+        self._first_name = None
+        self._last_name = None
+
+# Usage - looks like attribute access
+user = User("John", "Doe")
+print(user.full_name)  # "John Doe" (calls getter)
+user.full_name = "Jane Smith"  # Calls setter
+del user.full_name  # Calls deleter
+```
+
+</td>
+</tr>
+</table>
+
+### Inheritance
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Parent class
+class User {
+    protected $name;
+    protected $email;
+    
+    public function __construct($name, $email) {
+        $this->name = $name;
+        $this->email = $email;
+    }
+    
+    public function greet() {
+        return "Hello, I'm " . $this->name;
+    }
+}
+
+// Child class
+class Admin extends User {
+    private $permissions;
+    
+    public function __construct($name, $email, $permissions) {
+        parent::__construct($name, $email);
+        $this->permissions = $permissions;
+    }
+    
+    // Override method
+    public function greet() {
+        return "Hello, I'm Admin " . $this->name;
+    }
+    
+    // Call parent method
+    public function parentGreet() {
+        return parent::greet();
+    }
+}
+
+$admin = new Admin("John", "john@example.com", ["all"]);
+echo $admin->greet();  // "Hello, I'm Admin John"
+?>
+```
+
+</td>
+<td>
+
+```python
+# Parent class
 class User:
     def __init__(self, name, email):
         self.name = name
@@ -405,546 +1661,1077 @@ class User:
     
     def greet(self):
         return f"Hello, I'm {self.name}"
-    
-    def __str__(self):
-        # PHP: __toString()
-        return f"User({self.name})"
 
-# Creating instance
-# PHP: $user = new User("John");
-user = User("John", "john@example.com")
-print(user.greet())
-
-# Class variables
-class User:
-    # PHP: public static $count = 0;
-    count = 0  # Class variable
-    
-    def __init__(self, name):
-        self.name = name  # Instance variable
-        User.count += 1
-    
-    @classmethod
-    def get_count(cls):
-        return cls.count
-
-# Properties
-class User:
-    def __init__(self, first_name, last_name):
-        self._first_name = first_name
-        self._last_name = last_name
-    
-    @property
-    def full_name(self):
-        return f"{self._first_name} {self._last_name}"
-    
-    @full_name.setter
-    def full_name(self, value):
-        self._first_name, self._last_name = value.split(' ', 1)
-
-user = User("John", "Doe")
-print(user.full_name)  # John Doe
-user.full_name = "Jane Smith"
-```
-
-### Session 2: Inheritance & Polymorphism (2 hours)
-
-**Topics:**
-- Class inheritance
-- Method overriding
-- super() function
-- Multiple inheritance
-- Abstract classes
-- Magic methods
-
-```python
-# Basic inheritance
-# PHP: class Admin extends User
+# Child class
 class Admin(User):
     def __init__(self, name, email, permissions):
+        # Call parent constructor
         super().__init__(name, email)
         self.permissions = permissions
     
+    # Override method
     def greet(self):
         return f"Hello, I'm Admin {self.name}"
+    
+    # Call parent method
+    def parent_greet(self):
+        return super().greet()
 
-# Multiple inheritance
+# Multiple inheritance (Python supports it)
 class Loggable:
     def log(self, message):
         print(f"[LOG] {message}")
 
-class AdminUser(User, Loggable):
+class SuperAdmin(Admin, Loggable):
     pass
 
-admin = AdminUser("John", "john@example.com")
-admin.log("User created")
+admin = Admin("John", "john@example.com", ["all"])
+print(admin.greet())  # "Hello, I'm Admin John"
+```
 
-# Abstract classes
+</td>
+</tr>
+</table>
+
+### Abstract Classes and Interfaces
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Interface
+interface Loggable {
+    public function log($message);
+}
+
+// Abstract class
+abstract class Animal {
+    protected $name;
+    
+    abstract public function makeSound();
+    
+    public function getName() {
+        return $this->name;
+    }
+}
+
+// Implementing interface and extending abstract
+class Dog extends Animal implements Loggable {
+    public function __construct($name) {
+        $this->name = $name;
+    }
+    
+    public function makeSound() {
+        return "Woof!";
+    }
+    
+    public function log($message) {
+        echo "[DOG LOG] $message";
+    }
+}
+
+$dog = new Dog("Buddy");
+echo $dog->makeSound();
+$dog->log("Dog created");
+?>
+```
+
+</td>
+<td>
+
+```python
 from abc import ABC, abstractmethod
 
+# Abstract base class (like interface + abstract)
+class Loggable(ABC):
+    @abstractmethod
+    def log(self, message):
+        pass
+
+# Abstract class
 class Animal(ABC):
+    def __init__(self, name):
+        self.name = name
+    
     @abstractmethod
     def make_sound(self):
         pass
+    
+    def get_name(self):
+        return self.name
 
-class Dog(Animal):
+# Implementing abstract classes (multiple inheritance)
+class Dog(Animal, Loggable):
     def make_sound(self):
         return "Woof!"
+    
+    def log(self, message):
+        print(f"[DOG LOG] {message}")
 
-# Magic methods
-class Product:
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-    
-    def __str__(self):
-        return f"{self.name}: ${self.price}"
-    
-    def __repr__(self):
-        return f"Product('{self.name}', {self.price})"
-    
-    def __eq__(self, other):
-        return self.price == other.price
-    
-    def __lt__(self, other):
-        return self.price < other.price
+dog = Dog("Buddy")
+print(dog.make_sound())
+dog.log("Dog created")
+
+# Protocol (Python 3.8+) - like structural interface
+from typing import Protocol
+
+class Drawable(Protocol):
+    def draw(self) -> str:
+        ...
 ```
 
-### Session 3: Modules & Packages (2 hours)
-
-**Topics:**
-- Importing modules
-- Creating modules
-- Package structure
-- __init__.py files
-- Relative vs absolute imports
-- Common standard library modules
-
-```python
-# PHP: require 'file.php'; include 'file.php';
-# Python imports:
-
-# Import entire module
-import math
-print(math.sqrt(16))
-
-# Import specific items
-from math import sqrt, pi
-print(sqrt(16))
-
-# Import with alias
-import datetime as dt
-now = dt.datetime.now()
-
-# Import everything (not recommended)
-from math import *
-
-# Creating a module
-# File: mymodule.py
-def greet(name):
-    return f"Hello {name}"
-
-PI = 3.14159
-
-# Using it:
-import mymodule
-print(mymodule.greet("John"))
-
-# Package structure
-"""
-mypackage/
-    __init__.py
-    module1.py
-    module2.py
-    subpackage/
-        __init__.py
-        module3.py
-"""
-
-# Importing from package
-from mypackage import module1
-from mypackage.subpackage import module3
-
-# Common standard library modules
-import os           # Operating system
-import sys          # System-specific
-import datetime     # Date and time
-import json         # JSON operations
-import re           # Regular expressions
-import random       # Random numbers
-import pathlib      # Path operations
-from collections import defaultdict, Counter
-from functools import wraps
-```
-
-### Session 4: Python Tooling (1.5 hours)
-
-**Topics:**
-- pip and package management
-- requirements.txt
-- Virtual environments in depth
-- Code formatting (black, autopep8)
-- Linting (pylint, flake8)
-- Type checking (mypy)
-
-```bash
-# Creating virtual environment
-python -m venv venv
-
-# Activating
-# Linux/Mac: source venv/bin/activate
-# Windows: venv\Scripts\activate
-
-# Installing packages
-pip install django requests psycopg2-binary
-
-# Saving dependencies
-pip freeze > requirements.txt
-
-# Installing from requirements
-pip install -r requirements.txt
-
-# Common development packages
-pip install black pylint mypy pytest
-
-# Using black for formatting
-black myfile.py
-
-# Type checking
-mypy myfile.py
-```
+</td>
+</tr>
+</table>
 
 ---
 
-## Day 4: Python for Web Development
+## File Operations
 
-### Session 1: Working with Databases (2 hours)
+### Reading and Writing Files
 
-**Topics:**
-- Database connections
-- psycopg2 for PostgreSQL
-- sqlite3 module
-- Basic SQL operations
-- Connection pooling
-- Context managers for DB
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Read entire file
+$content = file_get_contents('file.txt');
+
+// Read file line by line
+$lines = file('file.txt');
+foreach ($lines as $line) {
+    echo $line;
+}
+
+// Read with file handle
+$handle = fopen('file.txt', 'r');
+while (($line = fgets($handle)) !== false) {
+    echo $line;
+}
+fclose($handle);
+
+// Write to file (overwrite)
+file_put_contents('file.txt', "Hello World");
+
+// Append to file
+file_put_contents('file.txt', "New line", FILE_APPEND);
+
+// Write with file handle
+$handle = fopen('file.txt', 'w');
+fwrite($handle, "Hello World\n");
+fwrite($handle, "Line 2\n");
+fclose($handle);
+
+// Check if file exists
+if (file_exists('file.txt')) {
+    echo "File exists";
+}
+
+// Delete file
+unlink('file.txt');
+
+// Get file size
+filesize('file.txt');
+
+// Get file info
+$info = pathinfo('path/to/file.txt');
+echo $info['dirname'];    // 'path/to'
+echo $info['basename'];   // 'file.txt'
+echo $info['filename'];   // 'file'
+echo $info['extension'];  // 'txt'
+?>
+```
+
+</td>
+<td>
 
 ```python
-# SQLite example
-import sqlite3
+# Read entire file
+with open('file.txt', 'r') as f:
+    content = f.read()
 
-# PHP: $conn = new PDO('sqlite:database.db');
-# Python:
-conn = sqlite3.connect('database.db')
-cursor = conn.cursor()
+# Read file line by line
+with open('file.txt', 'r') as f:
+    for line in f:
+        print(line.strip())
 
-# Create table
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT UNIQUE
-    )
-''')
+# Read all lines as list
+with open('file.txt', 'r') as f:
+    lines = f.readlines()
 
-# Insert
-# PHP: $stmt->execute([':name' => $name]);
-cursor.execute('INSERT INTO users (name, email) VALUES (?, ?)', 
-               ('John', 'john@example.com'))
-conn.commit()
+# Write to file (overwrite)
+with open('file.txt', 'w') as f:
+    f.write("Hello World\n")
 
-# Query
-cursor.execute('SELECT * FROM users')
-for row in cursor.fetchall():
-    print(row)
+# Append to file
+with open('file.txt', 'a') as f:
+    f.write("New line\n")
 
-conn.close()
+# Write multiple lines
+with open('file.txt', 'w') as f:
+    f.write("Hello World\n")
+    f.write("Line 2\n")
+    # Or
+    f.writelines(['Line 1\n', 'Line 2\n'])
 
+# Check if file exists
+import os
+if os.path.exists('file.txt'):
+    print("File exists")
+
+# Delete file
+os.remove('file.txt')
+
+# Get file size
+os.path.getsize('file.txt')
+
+# Get file info
+import pathlib
+path = pathlib.Path('path/to/file.txt')
+print(path.parent)       # 'path/to'
+print(path.name)         # 'file.txt'
+print(path.stem)         # 'file'
+print(path.suffix)       # '.txt'
+```
+
+</td>
+</tr>
+</table>
+
+### JSON Operations
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Array/object to JSON
+$data = [
+    "name" => "John",
+    "age" => 30,
+    "hobbies" => ["reading", "coding"]
+];
+
+$json = json_encode($data);
+echo $json;
+// {"name":"John","age":30,"hobbies":["reading","coding"]}
+
+// Pretty print
+$json = json_encode($data, JSON_PRETTY_PRINT);
+
+// JSON to array
+$decoded = json_decode($json, true);
+
+// JSON to object
+$obj = json_decode($json);
+echo $obj->name;
+
+// Read JSON file
+$data = json_decode(file_get_contents('data.json'), true);
+
+// Write JSON file
+file_put_contents('data.json', json_encode($data));
+
+// Error handling
+$json = json_encode($data);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo "JSON Error: " . json_last_error_msg();
+}
+?>
+```
+
+</td>
+<td>
+
+```python
+import json
+
+# Dictionary to JSON
+data = {
+    "name": "John",
+    "age": 30,
+    "hobbies": ["reading", "coding"]
+}
+
+json_str = json.dumps(data)
+print(json_str)
+# {"name": "John", "age": 30, "hobbies": ["reading", "coding"]}
+
+# Pretty print
+json_str = json.dumps(data, indent=2)
+
+# JSON to dictionary
+decoded = json.loads(json_str)
+
+# Read JSON file
+with open('data.json', 'r') as f:
+    data = json.load(f)
+
+# Write JSON file
+with open('data.json', 'w') as f:
+    json.dump(data, f, indent=2)
+
+# Error handling
+try:
+    data = json.loads(json_str)
+except json.JSONDecodeError as e:
+    print(f"JSON Error: {e}")
+
+# Custom encoder for datetime
+from datetime import datetime
+
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        return super().default(obj)
+
+json.dumps(data, cls=DateTimeEncoder)
+```
+
+</td>
+</tr>
+</table>
+
+### CSV Operations
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// Read CSV
+$file = fopen('users.csv', 'r');
+while (($row = fgetcsv($file)) !== false) {
+    print_r($row);
+}
+fclose($file);
+
+// Read with headers
+$file = fopen('users.csv', 'r');
+$headers = fgetcsv($file);
+while (($row = fgetcsv($file)) !== false) {
+    $data = array_combine($headers, $row);
+    echo $data['name'];
+}
+fclose($file);
+
+// Write CSV
+$file = fopen('output.csv', 'w');
+fputcsv($file, ['Name', 'Email', 'Age']);
+fputcsv($file, ['John', 'john@example.com', 30]);
+fputcsv($file, ['Jane', 'jane@example.com', 25]);
+fclose($file);
+
+// Read entire CSV to array
+$data = array_map('str_getcsv', file('users.csv'));
+?>
+```
+
+</td>
+<td>
+
+```python
+import csv
+
+# Read CSV
+with open('users.csv', 'r') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
+
+# Read with headers (DictReader)
+with open('users.csv', 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row['name'])
+
+# Write CSV
+with open('output.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(['Name', 'Email', 'Age'])
+    writer.writerow(['John', 'john@example.com', 30])
+    writer.writerow(['Jane', 'jane@example.com', 25])
+
+# Write with headers (DictWriter)
+with open('output.csv', 'w', newline='') as f:
+    fieldnames = ['name', 'email', 'age']
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    
+    writer.writeheader()
+    writer.writerow({'name': 'John', 
+                     'email': 'john@example.com', 
+                     'age': 30})
+
+# Read entire CSV to list
+with open('users.csv', 'r') as f:
+    data = list(csv.reader(f))
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## Database Operations
+
+### Database Connection
+
+<table>
+<tr>
+<th>PHP (PDO)</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// PostgreSQL with PDO
+try {
+    $pdo = new PDO(
+        'pgsql:host=localhost;dbname=mydb',
+        'user',
+        'password'
+    );
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
+    );
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+// MySQL with PDO
+$pdo = new PDO(
+    'mysql:host=localhost;dbname=mydb;charset=utf8mb4',
+    'user',
+    'password'
+);
+
+// SQLite with PDO
+$pdo = new PDO('sqlite:database.db');
+?>
+```
+
+</td>
+<td>
+
+```python
 # PostgreSQL with psycopg2
 import psycopg2
 
-conn = psycopg2.connect(
+try:
+    conn = psycopg2.connect(
+        host="localhost",
+        database="mydb",
+        user="user",
+        password="password"
+    )
+except psycopg2.Error as e:
+    print(f"Connection failed: {e}")
+
+# MySQL with mysql.connector
+import mysql.connector
+
+conn = mysql.connector.connect(
     host="localhost",
     database="mydb",
     user="user",
     password="password"
 )
 
-# Using context manager
-with conn.cursor() as cursor:
-    cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))
-    user = cursor.fetchone()
+# SQLite with sqlite3
+import sqlite3
+
+conn = sqlite3.connect('database.db')
 ```
 
-### Session 2: HTTP & APIs (2 hours)
+</td>
+</tr>
+</table>
 
-**Topics:**
-- requests library
-- Making HTTP calls
-- REST API consumption
-- JSON handling
-- Authentication
-- Error handling in requests
+### CRUD Operations
 
-```python
-import requests
+<table>
+<tr>
+<th>PHP (PDO)</th>
+<th>Python (psycopg2)</th>
+</tr>
+<tr>
+<td>
 
-# PHP: file_get_contents() or cURL
-# Python requests:
+```php
+<?php
+// SELECT
+$stmt = $pdo->prepare(
+    'SELECT * FROM users WHERE age > :age'
+);
+$stmt->execute(['age' => 18]);
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-# GET request
-response = requests.get('https://api.example.com/users')
-print(response.status_code)
-print(response.json())
-
-# POST request
-data = {'name': 'John', 'email': 'john@example.com'}
-response = requests.post('https://api.example.com/users', json=data)
-
-# Headers and authentication
-headers = {
-    'Authorization': 'Bearer token123',
-    'Content-Type': 'application/json'
+foreach ($users as $user) {
+    echo $user['name'];
 }
-response = requests.get('https://api.example.com/profile', headers=headers)
 
-# Query parameters
-params = {'page': 1, 'limit': 10}
-response = requests.get('https://api.example.com/users', params=params)
+// SELECT single row
+$stmt = $pdo->prepare(
+    'SELECT * FROM users WHERE id = :id'
+);
+$stmt->execute(['id' => 1]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-# Error handling
+// INSERT
+$stmt = $pdo->prepare(
+    'INSERT INTO users (name, email, age) 
+     VALUES (:name, :email, :age)'
+);
+$stmt->execute([
+    'name' => 'John',
+    'email' => 'john@example.com',
+    'age' => 30
+]);
+$lastId = $pdo->lastInsertId();
+
+// UPDATE
+$stmt = $pdo->prepare(
+    'UPDATE users SET age = :age WHERE id = :id'
+);
+$stmt->execute(['age' => 31, 'id' => 1]);
+$rowCount = $stmt->rowCount();
+
+// DELETE
+$stmt = $pdo->prepare(
+    'DELETE FROM users WHERE id = :id'
+);
+$stmt->execute(['id' => 1]);
+
+// Transaction
+try {
+    $pdo->beginTransaction();
+    
+    $pdo->exec("INSERT INTO users ...");
+    $pdo->exec("UPDATE accounts ...");
+    
+    $pdo->commit();
+} catch (Exception $e) {
+    $pdo->rollBack();
+    throw $e;
+}
+?>
+```
+
+</td>
+<td>
+
+```python
+# SELECT
+cursor = conn.cursor()
+cursor.execute(
+    'SELECT * FROM users WHERE age > %s',
+    (18,)
+)
+users = cursor.fetchall()
+
+for user in users:
+    print(user[0])  # Or use column name
+
+# SELECT with DictCursor
+import psycopg2.extras
+cursor = conn.cursor(
+    cursor_factory=psycopg2.extras.DictCursor
+)
+cursor.execute('SELECT * FROM users')
+for user in cursor.fetchall():
+    print(user['name'])
+
+# SELECT single row
+cursor.execute(
+    'SELECT * FROM users WHERE id = %s',
+    (1,)
+)
+user = cursor.fetchone()
+
+# INSERT
+cursor.execute(
+    'INSERT INTO users (name, email, age) '
+    'VALUES (%s, %s, %s) RETURNING id',
+    ('John', 'john@example.com', 30)
+)
+last_id = cursor.fetchone()[0]
+conn.commit()
+
+# UPDATE
+cursor.execute(
+    'UPDATE users SET age = %s WHERE id = %s',
+    (31, 1)
+)
+row_count = cursor.rowcount
+conn.commit()
+
+# DELETE
+cursor.execute(
+    'DELETE FROM users WHERE id = %s',
+    (1,)
+)
+conn.commit()
+
+# Transaction
 try:
-    response = requests.get('https://api.example.com/users', timeout=5)
-    response.raise_for_status()  # Raises exception for 4xx/5xx
-    data = response.json()
-except requests.exceptions.RequestException as e:
-    print(f"Error: {e}")
-
-# Session for multiple requests
-session = requests.Session()
-session.headers.update({'Authorization': 'Bearer token123'})
-response1 = session.get('https://api.example.com/users')
-response2 = session.get('https://api.example.com/posts')
+    cursor.execute("INSERT INTO users ...")
+    cursor.execute("UPDATE accounts ...")
+    conn.commit()
+except Exception as e:
+    conn.rollback()
+    raise e
+finally:
+    cursor.close()
+    conn.close()
 ```
 
-### Session 3: Async Python Basics (2 hours)
+</td>
+</tr>
+</table>
 
-**Topics:**
-- async/await syntax
-- asyncio basics
-- Async vs sync
-- When to use async
-- Basic async patterns
+### Context Managers for Database
+
+<table>
+<tr>
+<th>PHP</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// No built-in context manager
+// Manual cleanup needed
+try {
+    $pdo = new PDO(...);
+    $stmt = $pdo->prepare(...);
+    $stmt->execute(...);
+    $results = $stmt->fetchAll();
+} finally {
+    $pdo = null;  // Close connection
+}
+
+// Or using a wrapper
+class Database {
+    private $pdo;
+    
+    public function __construct() {
+        $this->pdo = new PDO(...);
+    }
+    
+    public function __destruct() {
+        $this->pdo = null;
+    }
+}
+?>
+```
+
+</td>
+<td>
 
 ```python
-import asyncio
-import aiohttp
+# Using context manager (with statement)
+with psycopg2.connect(...) as conn:
+    with conn.cursor() as cursor:
+        cursor.execute('SELECT * FROM users')
+        results = cursor.fetchall()
+# Connection automatically closed
 
-# Async function
-async def fetch_user(user_id):
-    await asyncio.sleep(1)  # Simulating I/O
-    return {"id": user_id, "name": f"User {user_id}"}
+# Or
+from contextlib import closing
 
-# Running async code
-async def main():
-    user = await fetch_user(1)
-    print(user)
+with closing(psycopg2.connect(...)) as conn:
+    with closing(conn.cursor()) as cursor:
+        cursor.execute('SELECT * FROM users')
+        results = cursor.fetchall()
 
-# Run it
-asyncio.run(main())
+# Custom context manager
+from contextlib import contextmanager
 
-# Multiple concurrent tasks
-async def fetch_multiple_users():
-    tasks = [fetch_user(i) for i in range(1, 6)]
-    users = await asyncio.gather(*tasks)
-    return users
+@contextmanager
+def get_db_cursor():
+    conn = psycopg2.connect(...)
+    cursor = conn.cursor()
+    try:
+        yield cursor
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        cursor.close()
+        conn.close()
 
-# Async HTTP requests
-async def fetch_url(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            return await response.json()
-
-async def fetch_multiple_apis():
-    urls = [
-        'https://api.example.com/users/1',
-        'https://api.example.com/users/2',
-        'https://api.example.com/users/3'
-    ]
-    tasks = [fetch_url(url) for url in urls]
-    results = await asyncio.gather(*tasks)
-    return results
+# Usage
+with get_db_cursor() as cursor:
+    cursor.execute('SELECT * FROM users')
 ```
 
-### Session 4: Testing in Python (1.5 hours)
-
-**Topics:**
-- unittest module
-- pytest framework
-- Test structure
-- Fixtures
-- Mocking
-- Test coverage
-
-```python
-# Using pytest (recommended)
-# test_user.py
-
-def test_user_creation():
-    user = User("John", "john@example.com")
-    assert user.name == "John"
-    assert user.email == "john@example.com"
-
-def test_user_greet():
-    user = User("John", "john@example.com")
-    assert user.greet() == "Hello, I'm John"
-
-# Fixtures
-import pytest
-
-@pytest.fixture
-def sample_user():
-    return User("John", "john@example.com")
-
-def test_with_fixture(sample_user):
-    assert sample_user.name == "John"
-
-# Mocking
-from unittest.mock import Mock, patch
-
-def test_api_call():
-    with patch('requests.get') as mock_get:
-        mock_get.return_value.json.return_value = {'id': 1}
-        result = fetch_user_data(1)
-        assert result['id'] == 1
-
-# Running tests
-# pytest test_user.py
-# pytest --cov=myapp tests/
-```
+</td>
+</tr>
+</table>
 
 ---
 
-## Day 5: Django Introduction & PHP to Django Migration
+## Web Framework Comparison
 
-### Session 1: Django Fundamentals (2 hours)
+### Routing
 
-**Topics:**
-- Django project structure
-- MVT pattern (Model-View-Template)
-- Settings configuration
-- URL routing
-- Views and responses
-- Django vs Laravel/Symfony comparison
+<table>
+<tr>
+<th>PHP (Laravel)</th>
+<th>Python (Django)</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// routes/web.php
+
+use App\Http\Controllers\UserController;
+
+// Basic route
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Controller route
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+Route::post('/users', [UserController::class, 'store']);
+Route::put('/users/{id}', [UserController::class, 'update']);
+Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+// Resource route (all CRUD routes)
+Route::resource('users', UserController::class);
+
+// Route groups
+Route::prefix('api')->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+});
+
+// Named routes
+Route::get('/profile', function () {
+    //
+})->name('profile');
+
+// Route with middleware
+Route::get('/admin', function () {
+    //
+})->middleware('auth');
+?>
+```
+
+</td>
+<td>
 
 ```python
-# Creating a Django project
-django-admin startproject myproject
-cd myproject
-python manage.py startapp users
-
-# Project structure
-"""
-myproject/
-    manage.py
-    myproject/
-        __init__.py
-        settings.py    # Like config/app.php in Laravel
-        urls.py        # Like routes/web.php
-        wsgi.py
-        asgi.py
-    users/
-        __init__.py
-        models.py      # Like Eloquent models
-        views.py       # Like Controllers
-        urls.py
-        admin.py
-        tests.py
-"""
-
-# settings.py configuration
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'users',  # Your app
-]
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb',
-        'USER': 'user',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
-# URL routing
-# myproject/urls.py
+# urls.py
 from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
-]
-
-# users/urls.py
-from django.urls import path
 from . import views
 
+# Basic URLconf
 urlpatterns = [
-    path('', views.user_list, name='user-list'),
-    path('<int:user_id>/', views.user_detail, name='user-detail'),
+    # Function-based views
+    path('', views.index, name='index'),
+    path('users/', views.user_list, name='user-list'),
+    path('users/<int:pk>/', views.user_detail, name='user-detail'),
+    
+    # Class-based views
+    path('users/', views.UserListView.as_view()),
+    
+    # Include other URL configs
+    path('api/', include('api.urls')),
 ]
 
-# Views
-# users/views.py
-from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from .models import User
+# Using ViewSets (like resource routes)
+from rest_framework.routers import DefaultRouter
+from .views import UserViewSet
 
-# Function-based view (like PHP controllers)
+router = DefaultRouter()
+router.register(r'users', UserViewSet)
+urlpatterns = router.urls
+
+# URL patterns with regex
+from django.urls import re_path
+
+urlpatterns = [
+    re_path(r'^articles/(?P<year>[0-9]{4})/$', views.year_archive),
+]
+
+# Named URLs (reverse lookup)
+from django.urls import reverse
+url = reverse('user-detail', kwargs={'pk': 1})
+```
+
+</td>
+</tr>
+</table>
+
+### Views/Controllers
+
+<table>
+<tr>
+<th>PHP (Laravel)</th>
+<th>Python (Django)</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    // List all users
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', ['users' => $users]);
+    }
+    
+    // Show single user
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('users.show', ['user' => $user]);
+    }
+    
+    // Create user form
+    public function create()
+    {
+        return view('users.create');
+    }
+    
+    // Store new user
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users',
+        ]);
+        
+        $user = User::create($validated);
+        
+        return redirect()->route('users.show', $user->id);
+    }
+    
+    // Update user
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        
+        return redirect()->route('users.show', $user->id);
+    }
+    
+    // Delete user
+    public function destroy($id)
+    {
+        User::destroy($id);
+        return redirect()->route('users.index');
+    }
+    
+    // JSON response
+    public function apiIndex()
+    {
+        $users = User::all();
+        return response()->json($users);
+    }
+}
+?>
+```
+
+</td>
+<td>
+
+```python
+# views.py
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from .models import User
+from .forms import UserForm
+
+# Function-based views
 def user_list(request):
     users = User.objects.all()
     return render(request, 'users/list.html', {'users': users})
 
-def user_detail(request, user_id):
-    user = get_object_or_404(User, pk=user_id)
+def user_detail(request, pk):
+    user = get_object_or_404(User, pk=pk)
     return render(request, 'users/detail.html', {'user': user})
 
-# Class-based view
-from django.views import View
+def user_create(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('user-detail', pk=user.pk)
+    else:
+        form = UserForm()
+    return render(request, 'users/create.html', {'form': form})
 
-class UserListView(View):
-    def get(self, request):
-        users = User.objects.all()
-        return render(request, 'users/list.html', {'users': users})
-    
-    def post(self, request):
-        # Handle user creation
-        pass
+def user_update(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-detail', pk=user.pk)
+    else:
+        form = UserForm(instance=user)
+    return render(request, 'users/edit.html', {'form': form})
+
+def user_delete(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    user.delete()
+    return redirect('user-list')
+
+# JSON response
+def api_user_list(request):
+    users = list(User.objects.values())
+    return JsonResponse(users, safe=False)
+
+# Class-based views
+from django.views.generic import ListView, DetailView
+
+class UserListView(ListView):
+    model = User
+    template_name = 'users/list.html'
+    context_object_name = 'users'
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'users/detail.html'
 ```
 
-### Session 2: Django Models (ORM) (2 hours)
+</td>
+</tr>
+</table>
 
-**Topics:**
-- Model definition
-- Field types
-- Relationships
-- QuerySet API
-- Migrations
-- Django ORM vs PHP ORMs (Eloquent, Doctrine)
+### Models/ORM
+
+<table>
+<tr>
+<th>PHP (Laravel Eloquent)</th>
+<th>Python (Django ORM)</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    // Table name (auto-detected if not set)
+    protected $table = 'users';
+    
+    // Primary key
+    protected $primaryKey = 'id';
+    
+    // Fillable fields
+    protected $fillable = [
+        'name',
+        'email',
+        'age',
+    ];
+    
+    // Hidden fields (for JSON)
+    protected $hidden = [
+        'password',
+    ];
+    
+    // Casts
+    protected $casts = [
+        'is_active' => 'boolean',
+        'created_at' => 'datetime',
+    ];
+    
+    // Relationships
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+    
+    // Scopes
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+    
+    // Accessors
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+    
+    // Mutators
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+}
+
+// Usage
+$users = User::all();
+$user = User::find(1);
+$users = User::where('age', '>', 18)->get();
+$user = User::create(['name' => 'John', 'email' => 'john@example.com']);
+?>
+```
+
+</td>
+<td>
 
 ```python
 # models.py
 from django.db import models
-from django.contrib.auth.models import User as AuthUser
 
-# PHP Eloquent: class User extends Model
-# Django:
 class User(models.Model):
     # Fields
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     age = models.IntegerField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
@@ -957,211 +2744,175 @@ class User(models.Model):
     
     def __str__(self):
         return self.name
-
-# Relationships
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE, 
-                               related_name='posts')
-    tags = models.ManyToManyField('Tag', related_name='posts')
     
-    def __str__(self):
-        return self.title
+    # Properties (like accessors)
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    # Custom save (like mutators)
+    def save(self, *args, **kwargs):
+        self.email = self.email.lower()
+        super().save(*args, **kwargs)
+    
+    # Relationships
+    # In Post model:
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    # Many-to-many
+    # roles = models.ManyToManyField(Role)
 
-class Tag(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+# Custom manager (like scopes)
+class UserManager(models.Manager):
+    def active(self):
+        return self.filter(is_active=True)
 
-# Migrations
-# python manage.py makemigrations
-# python manage.py migrate
+class User(models.Model):
+    # ... fields ...
+    objects = UserManager()
 
-# QuerySet API (like Eloquent)
-
-# PHP: User::all()
+# Usage
 users = User.objects.all()
-
-# PHP: User::find($id)
-user = User.objects.get(id=1)
-
-# PHP: User::where('age', '>', 18)->get()
+user = User.objects.get(pk=1)
 users = User.objects.filter(age__gt=18)
-
-# PHP: User::where('name', 'like', '%john%')->get()
-users = User.objects.filter(name__icontains='john')
-
-# PHP: User::orderBy('created_at', 'desc')->limit(10)
-users = User.objects.order_by('-created_at')[:10]
-
-# Relationships
-# PHP: $user->posts
-posts = user.posts.all()
-
-# PHP: Post::with('author')->get()
-posts = Post.objects.select_related('author').all()
-
-# PHP: Post::with('tags')->get()
-posts = Post.objects.prefetch_related('tags').all()
-
-# Aggregation
-from django.db.models import Count, Avg
-
-# Count posts per user
-User.objects.annotate(post_count=Count('posts'))
-
-# Average age
-User.objects.aggregate(avg_age=Avg('age'))
-
-# Creating records
 user = User.objects.create(name='John', email='john@example.com')
-
-# Or
-user = User(name='John', email='john@example.com')
-user.save()
-
-# Updating
-User.objects.filter(id=1).update(name='Jane')
-
-# Deleting
-User.objects.filter(id=1).delete()
+users = User.objects.active()  # Custom manager
 ```
 
-### Session 3: Django Forms & Templates (2 hours)
+</td>
+</tr>
+</table>
 
-**Topics:**
-- Django template language
-- Template inheritance
-- Forms and validation
-- CSRF protection
-- Static files
-- Django templates vs Blade/Twig
+---
 
-```python
-# Forms
-# forms.py
-from django import forms
-from .models import User
+## API Development
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['name', 'email', 'age']
+### REST API with JSON Response
+
+<table>
+<tr>
+<th>PHP (Laravel)</th>
+<th>Python (Django REST Framework)</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+namespace App\Http\Controllers\Api;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+
+class UserController extends Controller
+{
+    // GET /api/users
+    public function index()
+    {
+        $users = User::all();
+        return UserResource::collection($users);
+    }
     
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('Email already exists')
-        return email
-
-# Using forms in views
-from django.shortcuts import render, redirect
-
-def create_user(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return redirect('user-detail', user_id=user.id)
-    else:
-        form = UserForm()
+    // GET /api/users/{id}
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return new UserResource($user);
+    }
     
-    return render(request, 'users/create.html', {'form': form})
-
-# Templates
-# templates/base.html
-"""
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% block title %}My Site{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    {% block content %}
-    {% endblock %}
-</body>
-</html>
-"""
-
-# templates/users/list.html
-"""
-{% extends 'base.html' %}
-
-{% block title %}Users{% endblock %}
-
-{% block content %}
-    <h1>Users</h1>
+    // POST /api/users
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'age' => 'nullable|integer|min:0',
+        ]);
+        
+        $user = User::create($validated);
+        
+        return new UserResource($user);
+    }
     
-    {% if users %}
-        <ul>
-        {% for user in users %}
-            <li>
-                {{ user.name }} - {{ user.email }}
-                {% if user.is_active %}
-                    <span>Active</span>
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No users found.</p>
-    {% endif %}
-{% endblock %}
-"""
+    // PUT /api/users/{id}
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:users,email,'.$id,
+            'age' => 'nullable|integer|min:0',
+        ]);
+        
+        $user->update($validated);
+        
+        return new UserResource($user);
+    }
+    
+    // DELETE /api/users/{id}
+    public function destroy($id)
+    {
+        User::destroy($id);
+        return response()->json(null, 204);
+    }
+}
 
-# Template filters
-"""
-{{ user.name|upper }}
-{{ user.created_at|date:"Y-m-d" }}
-{{ user.bio|truncatewords:50 }}
-{{ user.email|default:"No email" }}
-"""
+// Resource (Transformer)
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class UserResource extends JsonResource
+{
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'age' => $this->age,
+            'created_at' => $this->created_at->toDateTimeString(),
+        ];
+    }
+}
+?>
 ```
 
-### Session 4: Django REST Framework & Migration Tips (2 hours)
-
-**Topics:**
-- Django REST Framework basics
-- Serializers
-- API views
-- Authentication
-- Migration strategies from PHP to Django
-- Best practices
+</td>
+<td>
 
 ```python
-# Install: pip install djangorestframework
-
-# Serializers (like PHP transformers)
 # serializers.py
 from rest_framework import serializers
-from .models import User, Post
+from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
-    post_count = serializers.IntegerField(read_only=True)
-    
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'age', 'created_at', 'post_count']
+        fields = ['id', 'name', 'email', 'age', 'created_at']
         read_only_fields = ['id', 'created_at']
     
     def validate_email(self, value):
         if 'test' in value:
             raise serializers.ValidationError('Test emails not allowed')
-        return value
+        return value.lower()
 
-class PostSerializer(serializers.ModelSerializer):
-    author = UserSerializer(read_only=True)
-    
-    class Meta:
-        model = Post
-        fields = '__all__'
-
-# API Views
-from rest_framework import status
-from rest_framework.decorators import api_view
+# views.py
+from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .models import User
+from .serializers import UserSerializer
 
+# ViewSet (handles all CRUD operations)
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+# Or function-based views
 @api_view(['GET', 'POST'])
 def user_list(request):
     if request.method == 'GET':
@@ -1176,285 +2927,260 @@ def user_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Class-based API views
-from rest_framework import generics
+@api_view(['GET', 'PUT', 'DELETE'])
+def user_detail(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-class UserListCreateView(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-# ViewSets (like PHP Resource Controllers)
-from rest_framework import viewsets
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-# URLs for ViewSets
+# urls.py
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
-
 urlpatterns = router.urls
-
-# Authentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
 ```
 
----
-
-## PHP to Python Quick Reference
-
-### Syntax Comparison Cheat Sheet
-
-| PHP | Python | Notes |
-|-----|--------|-------|
-| `$variable` | `variable` | No $ prefix |
-| `define('CONST', 'value')` | `CONST = 'value'` | Module-level constants |
-| `echo`, `print` | `print()` | Function call required |
-| `array()`, `[]` | `[]` | Lists |
-| `[]` (assoc array) | `{}` | Dictionaries |
-| `null` | `None` | Capitalized |
-| `true`, `false` | `True`, `False` | Capitalized |
-| `&&`, `\|\|`, `!` | `and`, `or`, `not` | Words, not symbols |
-| `.` (concat) | `+` or f-strings | String concatenation |
-| `->` | `.` | Object member access |
-| `::` | `.` | Class member access |
-| `function name()` | `def name():` | Indentation-based |
-| `class Name {}` | `class Name:` | Indentation-based |
-| `new Class()` | `Class()` | No 'new' keyword |
-| `$this` | `self` | In class methods |
-| `__construct` | `__init__` | Constructor |
-| `extends` | `(ParentClass)` | Inheritance |
-| `interface` | `ABC` | Abstract base class |
-| `namespace` | module/package | File-based modules |
-| `use`, `require` | `import` | Module imports |
-| `try/catch` | `try/except` | Exception handling |
-| `foreach` | `for ... in` | Iteration |
-| `count()` | `len()` | Get length |
-| `is_array()` | `isinstance(x, list)` | Type checking |
-| `json_encode()` | `json.dumps()` | JSON serialization |
-| `json_decode()` | `json.loads()` | JSON parsing |
-| `$_GET`, `$_POST` | `request.GET`, `request.POST` | Django |
-| `$_SESSION` | `request.session` | Django |
+</td>
+</tr>
+</table>
 
 ---
 
-## Migration Checklist: PHP to Django
+## Common Patterns
 
-### 1. **Environment Setup**
-- [ ] Install Python 3.11+
-- [ ] Set up virtual environment
-- [ ] Install Django and dependencies
-- [ ] Configure database connections
-- [ ] Set up version control
+### Dependency Injection
 
-### 2. **Database Migration**
-- [ ] Export existing database schema
-- [ ] Create Django models matching schema
-- [ ] Generate migrations
-- [ ] Migrate data (use Django management commands)
-- [ ] Verify data integrity
+<table>
+<tr>
+<th>PHP (Laravel)</th>
+<th>Python</th>
+</tr>
+<tr>
+<td>
 
-### 3. **Code Migration Strategy**
-- [ ] Map PHP routes to Django URLs
-- [ ] Convert controllers to Django views
-- [ ] Convert models to Django ORM models
-- [ ] Migrate business logic to Python
-- [ ] Convert templates (Blade/Twig → Django templates)
+```php
+<?php
+// Service
+class UserService
+{
+    protected $repository;
+    
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+    
+    public function createUser($data)
+    {
+        return $this->repository->create($data);
+    }
+}
 
-### 4. **Authentication & Authorization**
-- [ ] Set up Django authentication
-- [ ] Migrate user accounts
-- [ ] Implement permission system
-- [ ] Set up session management
-- [ ] Configure CSRF protection
+// Controller with DI
+class UserController extends Controller
+{
+    protected $userService;
+    
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+    
+    public function store(Request $request)
+    {
+        $user = $this->userService->createUser($request->all());
+        return response()->json($user);
+    }
+}
 
-### 5. **API Development**
-- [ ] Install Django REST Framework
-- [ ] Create serializers
-- [ ] Implement API endpoints
-- [ ] Set up authentication (Token/JWT)
-- [ ] Document APIs
+// Service Provider
+class AppServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        $this->app->bind(UserRepository::class, function () {
+            return new UserRepository();
+        });
+    }
+}
+?>
+```
 
-### 6. **Testing**
-- [ ] Write unit tests
-- [ ] Write integration tests
-- [ ] Test API endpoints
-- [ ] Performance testing
-- [ ] Security testing
+</td>
+<td>
 
-### 7. **Deployment**
-- [ ] Set up production server (Gunicorn/uWSGI)
-- [ ] Configure web server (Nginx/Apache)
-- [ ] Set up static file serving
-- [ ] Configure logging
-- [ ] Set up monitoring
-
----
-
-## Common Pitfalls & Tips
-
-### 1. **Indentation Matters!**
 ```python
-# Wrong - will cause IndentationError
-def my_function():
-print("Hello")
+# Python doesn't have built-in DI container
+# But you can use patterns or libraries
 
-# Correct
-def my_function():
-    print("Hello")
+# Simple DI pattern
+class UserRepository:
+    def create(self, data):
+        # Create user
+        pass
+
+class UserService:
+    def __init__(self, repository=None):
+        self.repository = repository or UserRepository()
+    
+    def create_user(self, data):
+        return self.repository.create(data)
+
+# Using dependency-injector library
+from dependency_injector import containers, providers
+
+class Container(containers.DeclarativeContainer):
+    user_repository = providers.Singleton(UserRepository)
+    user_service = providers.Factory(
+        UserService,
+        repository=user_repository
+    )
+
+# Usage
+container = Container()
+user_service = container.user_service()
+
+# Or manual injection
+class UserView:
+    def __init__(self, user_service):
+        self.user_service = user_service
+    
+    def post(self, request):
+        user = self.user_service.create_user(request.data)
+        return JsonResponse({'user': user})
 ```
 
-### 2. **Mutable Default Arguments**
+</td>
+</tr>
+</table>
+
+### Environment Configuration
+
+<table>
+<tr>
+<th>PHP (Laravel)</th>
+<th>Python (Django)</th>
+</tr>
+<tr>
+<td>
+
+```php
+<?php
+// .env file
+APP_NAME=MyApp
+APP_ENV=production
+APP_DEBUG=false
+DB_HOST=localhost
+DB_DATABASE=mydb
+DB_USERNAME=user
+DB_PASSWORD=secret
+
+// config/database.php
+return [
+    'connections' => [
+        'mysql' => [
+            'host' => env('DB_HOST', 'localhost'),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+        ],
+    ],
+];
+
+// Usage
+$host = config('database.connections.mysql.host');
+$debug = env('APP_DEBUG', false);
+?>
+```
+
+</td>
+<td>
+
 ```python
-# Wrong - dangerous!
-def append_to(item, list=[]):
-    list.append(item)
-    return list
+# .env file
+APP_NAME=MyApp
+DEBUG=False
+SECRET_KEY=your-secret-key
+DATABASE_URL=postgresql://user:pass@localhost/mydb
 
-# Correct
-def append_to(item, list=None):
-    if list is None:
-        list = []
-    list.append(item)
-    return list
+# settings.py
+import os
+from decouple import config, Csv
+
+# Basic
+DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = config('SECRET_KEY')
+
+# Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
+    }
+}
+
+# Or using dj-database-url
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
+
+# List from env
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 ```
 
-### 3. **String Concatenation**
-```python
-# Not Pythonic
-name = "John"
-greeting = "Hello " + name + "!"
-
-# Pythonic - use f-strings
-greeting = f"Hello {name}!"
-```
-
-### 4. **List Comprehensions**
-```python
-# Instead of loops
-squares = []
-for x in range(10):
-    squares.append(x**2)
-
-# Use list comprehension
-squares = [x**2 for x in range(10)]
-```
-
-### 5. **Django QuerySet Evaluation**
-```python
-# Lazy evaluation - no DB hit yet
-users = User.objects.filter(age__gt=18)
-
-# Now it hits the database
-for user in users:
-    print(user.name)
-```
+</td>
+</tr>
+</table>
 
 ---
 
-## Practice Projects
+## Summary: Key Differences
 
-### Day 1-2: Python Basics
-- **Todo List CLI**: Command-line todo app with file storage
-- **Data Parser**: Parse CSV/JSON files and generate reports
-- **Contact Manager**: Store and search contacts
-
-### Day 3: OOP
-- **Library Management System**: Books, members, borrowing system
-- **Bank Account Simulator**: Accounts, transactions, inheritance
-
-### Day 4: Web/APIs
-- **Weather App**: Fetch weather data from API
-- **URL Shortener**: Simple URL shortening service
-- **API Consumer**: Consume and display data from public APIs
-
-### Day 5: Django
-- **Blog API**: Full CRUD blog with Django REST Framework
-- **User Management System**: Authentication, profiles, admin panel
-- **Task Manager**: Team collaboration tool
-
----
-
-## Resources
-
-### Official Documentation
-- Python: https://docs.python.org/3/
-- Django: https://docs.djangoproject.com/
-- Django REST Framework: https://www.django-rest-framework.org/
-
-### Learning Resources
-- Real Python: https://realpython.com/
-- Django for Beginners: https://djangoforbeginners.com/
-- Python Package Index (PyPI): https://pypi.org/
-
-### Tools
-- VS Code with Python extension
-- PyCharm (IDE)
-- Postman (API testing)
-- Django Debug Toolbar
-
-### Community
-- r/Python
-- r/django
-- Django Discord
-- Stack Overflow
+| Feature | PHP | Python |
+|---------|-----|--------|
+| **Syntax** | C-like with `{}` | Indentation-based |
+| **Variables** | `$variable` | `variable` |
+| **Arrays** | Single `array` type | Lists, tuples, dicts, sets |
+| **Strings** | `.` for concatenation | `+` or f-strings |
+| **Booleans** | `true`/`false` | `True`/`False` |
+| **Null** | `null` | `None` |
+| **Functions** | `function name() {}` | `def name():` |
+| **Classes** | `new Class()` | `Class()` |
+| **This** | `$this` | `self` |
+| **Static** | `self::` or `static::` | `cls` or direct access |
+| **Imports** | `require`/`use` | `import`/`from` |
+| **Error Handling** | `try/catch` | `try/except` |
+| **Iteration** | `foreach` | `for ... in` |
+| **List Ops** | Array functions | List comprehensions |
+| **Framework** | Laravel/Symfony | Django/Flask |
+| **ORM** | Eloquent/Doctrine | Django ORM/SQLAlchemy |
+| **Package Manager** | Composer | pip |
+| **Virtual Env** | Not standard | venv/virtualenv |
 
 ---
 
-## Assessment & Next Steps
-
-### Knowledge Check
-- [ ] Can write Python functions and classes
-- [ ] Understand Python data structures
-- [ ] Comfortable with Django models
-- [ ] Can create REST APIs
-- [ ] Understand Django ORM queries
-- [ ] Can deploy Django applications
-
-### After This Course
-1. **Practice**: Build real projects
-2. **Advanced Django**: Celery, Redis, WebSockets
-3. **Testing**: Pytest, Django testing best practices
-4. **Deployment**: Docker, AWS, DigitalOcean
-5. **Advanced Python**: Decorators, metaclasses, async programming
-
----
-
-## Daily Schedule Template
-
-**9:00 AM - 11:00 AM**: Theory & Examples  
-**11:00 AM - 11:15 AM**: Break  
-**11:15 AM - 1:00 PM**: Hands-on Practice  
-**1:00 PM - 2:00 PM**: Lunch  
-**2:00 PM - 4:00 PM**: Advanced Topics & Project Work  
-**4:00 PM - 4:15 PM**: Break  
-**4:15 PM - 5:30 PM**: Q&A, Code Review, Exercises  
-
----
-
-## Course Completion Certificate
-
-Upon completion, developers should be able to:
-- Write idiomatic Python code
-- Build REST APIs with Django
-- Understand Django ORM and database operations
-- Deploy Django applications
-- Migrate PHP applications to Python/Django
-
----
-
-**Good luck with your Python/Django journey! 🐍🚀**
+**This guide provides side-by-side comparisons to help PHP developers quickly understand Python equivalents and patterns. Happy coding! 🐍**
