@@ -92,10 +92,24 @@ def greet(name: str) -> str:
 
 **Topics:**
 - Lists (like PHP arrays)
+	•	Mutable (you can change items)
+	•	Ordered
+	•	Can store mixed data types
 - Tuples (immutable lists)
+	•	Immutable: cannot modify after creation
+	•	Ordered
+	•	Used for fixed data
 - Dictionaries (like PHP associative arrays)
+	•	Key-value pairs
+	•	Keys must be unique
+	•	Similar to PHP associative arrays
 - Sets
+	•	Unordered collection
+	•	No duplicate values
+	•	Useful for uniqueness checks
 - List comprehensions
+	•	A concise way to create lists
+	•	Replaces loops for generating new lists
 
 **PHP → Python Equivalents:**
 ```python
